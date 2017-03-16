@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DBT</string>
+    <string name="title_activity_dash_board">login</string>
+    <!--TODO: Add String Attributes for All UI string value attributes-->
+</resources>
