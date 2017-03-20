@@ -5,6 +5,7 @@
     <string name="ApplicationId">O2DV8bBoNPlrXULGTKhZLZ9J12w6UMiKvflesdkM</string>
     <string name="AndroidClientKey">FppqxlH5cNyJeImbu0VrE0PR1Sawfb8ByyWkCipE</string>
     <string name="ServerAddress">https://parseapi.back4app.com/</string>
+    <string name="login_header">Online Attendance</string>
 
     <!--TODO: Add String Attributes for All UI string value attributes-->
 </resources>

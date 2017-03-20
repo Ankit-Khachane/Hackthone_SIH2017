@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    tools:context="com.dbt.Login"
+    tools:ignore="MissingPrefix">
+
+
+    <TextView
+        android:id="@+id/login_header"
+        fontPath="fonts/Roboto-Medium.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/login_header"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="30sp"/>
+
+    <ImageView
+        android:id="@+id/login_prof_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_header"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="false"
+        android:layout_centerVertical="false"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_corner_shape"
+        app:srcCompat="@drawable/dbt_splash_logo"/>
+
+    <RelativeLayout
+        android:id="@+id/login_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        >
+
+        <LinearLayout
+            android:id="@+id/email_ed_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/round_corner_shape"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/email_tumb_logo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:background="@drawable/round_corner_shape"
+                android:backgroundTint="@color/colorAccent"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                app:srcCompat="@drawable/login_email_icon"/>
+
+            <EditText
+                android:id="@+id/email_ed"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_corner_shape"
+                android:backgroundTint="@color/cardview_light_background"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pass_ed_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/email_ed_box"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/round_corner_shape"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/pass_thub_logo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:background="@drawable/round_corner_shape"
+                android:backgroundTint="@color/colorAccent"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                app:srcCompat="@drawable/login_password_logo"/>
+
+            <EditText
+                android:id="@+id/pass_ed"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_corner_shape"
+                android:backgroundTint="@color/cardview_light_background"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/login_btn"
+        fontPath="fonts/Roboto-Bold.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
+        android:layout_below="@+id/forgot"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/round_corner_shape"
+        android:backgroundTint="@color/colorAccent"
+        android:text="Login"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="24dp"/>
+
+    <TextView
+        android:id="@+id/forgot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:text="Forgot Password ?"
+        android:textAlignment="center"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/reg_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Not Yet Registered ?"
+        android:textAlignment="center"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="18sp"/>
+
+    <Button
+        android:id="@+id/goto_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/reg_txt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_corner_shape"
+        android:backgroundTint="@color/colorAccent"
+        android:text="Register"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="24sp"/>
+
+</RelativeLayout>

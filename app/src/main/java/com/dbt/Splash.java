@@ -1,6 +1,7 @@
 package com.dbt;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -21,13 +22,12 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
 
-        //TODO: add bounce animation splash screen.
         logo = (ImageView) findViewById(R.id.dbt_logo);
         anim = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
         if (isNetworkAvailable()) {
             Toast.makeText(this, "Internet is Available", Toast.LENGTH_SHORT).show();
             //Splash Screen Thread Logic
-            anim.setDuration(2000);
+            anim.setDuration(1000);
             anim.setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationStart(Animation animation) {
@@ -36,8 +36,10 @@ public class Splash extends AppCompatActivity {
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
+                    startActivity(new Intent(Splash.this, Login.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     Toast.makeText(Splash.this, "Animation Stopped", Toast.LENGTH_SHORT).show();
-                    finish();
+
                 }
 
                 @Override

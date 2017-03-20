@@ -11,14 +11,11 @@
         <item name="android:windowBackground">@color/divider</item>
 
     </style>
-    <!--TODO: add fullscreen style for splash-->
 
     <style name="Splash" parent="Theme.AppCompat.Light.NoActionBar">
         <!--Splash screen style-->
-        <item name="android:windowFullscreen">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
-        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
