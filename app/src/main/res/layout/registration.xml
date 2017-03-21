@@ -9,14 +9,118 @@
     tools:context="com.dbt.Registration">
 
     <RelativeLayout
-        android:id="@+id/Frag_container"
+        android:id="@+id/Reg_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/round_corner_shape"
-        android:backgroundTint="@color/cardview_dark_background"
-        android:padding="10dp">
+        android:layout_centerVertical="true">
+
+
+        <LinearLayout
+            android:id="@+id/email_ed_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_ed_box"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/round_corner_shape"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/email_tumb_logo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:background="@drawable/round_corner_shape"
+                android:backgroundTint="@color/colorAccent"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                app:srcCompat="@drawable/login_email_icon"/>
+
+            <EditText
+                android:id="@+id/email_ed"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_corner_shape"
+                android:backgroundTint="@color/cardview_light_background"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/user_ed_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/round_corner_shape"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/user_thub_logo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:background="@drawable/round_corner_shape"
+                android:backgroundTint="@color/colorAccent"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:src="@drawable/register_username_logo"/>
+
+            <EditText
+                android:id="@+id/user_ed"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_corner_shape"
+                android:backgroundTint="@color/cardview_light_background"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pass_ed_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/email_ed_box"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/round_corner_shape"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/pass_thub_logo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:background="@drawable/round_corner_shape"
+                android:backgroundTint="@color/colorAccent"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                app:srcCompat="@drawable/login_password_logo"/>
+
+            <EditText
+                android:id="@+id/pass_ed"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_corner_shape"
+                android:backgroundTint="@color/cardview_light_background"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"/>
+        </LinearLayout>
 
     </RelativeLayout>
 
@@ -24,10 +128,37 @@
         android:id="@+id/reg_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Frag_container"
+        android:layout_below="@+id/Reg_view"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:text="Register"
         android:theme="@style/ButtonStyle"/>
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Online Attendance"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textAppearance="@android:style/TextAppearance.Material.Display1"
+        android:textColor="@color/cardview_light_background"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/detail_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Reg_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:text="Register with details submited to institute  "
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/cardview_light_background"
+        android:textStyle="bold"/>
 </RelativeLayout>

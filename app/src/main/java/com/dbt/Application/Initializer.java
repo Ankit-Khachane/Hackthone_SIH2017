@@ -1,6 +1,7 @@
 package com.dbt.Application;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.dbt.R;
 import com.parse.Parse;
@@ -13,6 +14,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
  */
 
 public class Initializer extends Application {
+    private final String TAG = getClass().getSimpleName();
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -29,5 +32,6 @@ public class Initializer extends Application {
 
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         installation.saveInBackground();
+        Log.i(TAG, "onCreate: ");
     }
 }
