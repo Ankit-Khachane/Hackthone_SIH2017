@@ -13,8 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Splash"
-            android:theme="@style/Splash">
+            android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -22,8 +21,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Login"
-            android:theme="@style/Splash">
+            android:name=".Login">
+        </activity>
+        <activity android:name=".Registration">
         </activity>
     </application>
 

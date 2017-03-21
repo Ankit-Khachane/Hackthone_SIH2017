@@ -39,7 +39,7 @@
         app:srcCompat="@drawable/dbt_splash_logo"/>
 
     <RelativeLayout
-        android:id="@+id/login_view"
+        android:id="@+id/Frag_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -47,7 +47,7 @@
         >
 
         <LinearLayout
-            android:id="@+id/email_ed_box"
+            android:id="@+id/reg_fone_username_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -84,7 +84,7 @@
             android:id="@+id/pass_ed_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/email_ed_box"
+            android:layout_below="@+id/reg_fone_username_box"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="5dp"
@@ -138,7 +138,7 @@
         android:id="@+id/forgot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/login_view"
+        android:layout_below="@+id/Frag_container"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="15dp"
