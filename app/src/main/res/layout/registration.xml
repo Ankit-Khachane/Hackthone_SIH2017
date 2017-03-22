@@ -81,7 +81,7 @@
                 android:background="@drawable/round_corner_shape"
                 android:backgroundTint="@color/cardview_light_background"
                 android:ems="10"
-                android:hint="Password"
+                android:hint="Username"
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"/>
         </LinearLayout>
@@ -108,18 +108,28 @@
                 android:paddingTop="5dp"
                 app:srcCompat="@drawable/login_password_logo"/>
 
-            <EditText
-                android:id="@+id/pass_ed"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/round_corner_shape"
-                android:backgroundTint="@color/cardview_light_background"
-                android:ems="10"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:paddingLeft="10dp"/>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/etPasswordLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="true">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/pass_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_corner_shape"
+                    android:backgroundTint="@color/cardview_light_background"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:paddingLeft="10dp"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
         </LinearLayout>
 
     </RelativeLayout>
@@ -132,7 +142,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:text="Register"
+        android:layout_marginTop="50dp"
+        android:text="Verify Identity"
         android:theme="@style/ButtonStyle"/>
 
     <TextView
@@ -156,9 +167,22 @@
         android:layout_above="@+id/Reg_view"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:text="Register with details submited to institute  "
+        android:text="Please Enter the name and email affliated to your institute  "
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/cardview_light_background"
         android:textStyle="bold"/>
+
+    <com.dbt.UI.ProgressWheel
+        xmlns:wheel="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/loading"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_above="@id/detail_tv"
+        android:layout_below="@+id/tv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        wheel:matProg_barColor="@color/colorAccent"
+        wheel:matProg_circleRadius="40dp"
+        wheel:matProg_progressIndeterminate="true"/>
 </RelativeLayout>

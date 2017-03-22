@@ -2,6 +2,7 @@ package com.dbt;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -23,6 +24,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     protected TextView forgot;
     protected Button gotoRegister;
     protected App a;
+    protected TextView loginHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,5 +61,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         forgot = (TextView) findViewById(R.id.forgot);
         gotoRegister = (Button) findViewById(R.id.goto_register);
         gotoRegister.setOnClickListener(Login.this);
+        loginHeader = (TextView) findViewById(R.id.login_header);
+        loginHeader.setPaintFlags(loginHeader.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 }

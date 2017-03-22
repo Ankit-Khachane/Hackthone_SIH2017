@@ -37,6 +37,7 @@ public class Splash extends AppCompatActivity {
                 @Override
                 public void onAnimationEnd(Animation animation) {
                     startActivity(new Intent(Splash.this, Login.class));
+                    finish();
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     Toast.makeText(Splash.this, "Animation Stopped", Toast.LENGTH_SHORT).show();
 
