@@ -2,8 +2,8 @@
     <string name="app_name">DBT</string>
     <string name="title_activity_dash_board">login</string>
 
-    <string name="ApplicationId">O2DV8bBoNPlrXULGTKhZLZ9J12w6UMiKvflesdkM</string>
-    <string name="AndroidClientKey">FppqxlH5cNyJeImbu0VrE0PR1Sawfb8ByyWkCipE</string>
+    <string name="ApplicationId">3HrrJfokCotOHawmQElc5seAoFU5gjvIPWBXhLkG</string>
+    <string name="AndroidClientKey">k9lLCkbAQmBQUYi4mVZ8iVJgwJpOdCFgz2ii40Dh</string>
     <string name="ServerAddress">https://parseapi.back4app.com/</string>
     <string name="login_header">Online Attendance</string>
 

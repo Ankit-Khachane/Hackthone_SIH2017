@@ -82,7 +82,6 @@
                 android:backgroundTint="@color/cardview_light_background"
                 android:ems="10"
                 android:hint="Username"
-                android:inputType="textPassword"
                 android:paddingLeft="10dp"/>
         </LinearLayout>
 

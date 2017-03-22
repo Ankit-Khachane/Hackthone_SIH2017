@@ -1,6 +1,7 @@
 package com.dbt;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -17,23 +18,30 @@ import android.widget.TextView;
 
 import com.dbt.Application.App;
 import com.dbt.UI.ProgressWheel;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
+
+import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Registration extends AppCompatActivity implements View.OnClickListener {
 
+    protected static boolean emailVerified = false;
     protected int spinflag = 0;
-    protected boolean emailVerified = false;
     protected Animation ani;
     protected Button regBtn;
-    protected EditText emailEd;
-    protected EditText userEd;
-    protected EditText passEd;
+    protected EditText emailEd, userEd, passEd;
     protected TextView tv;
     protected ImageView passThubLogo;
     protected TextInputLayout etPasswordLayout;
     protected LinearLayout passEdBox;
     protected ProgressWheel prog;
+    private String uname, uemail, upassw;
     private String TAG = getClass().getSimpleName();
     private App a;
 
@@ -53,26 +61,59 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             if (spinflag == 0) {
                 if (!prog.isSpinning()) {
                     prog.spin();
+                    regBtn.setEnabled(false);
                     spinflag++;
-                    String email = emailEd.getText().toString();
-                    if (a.verifyUser(email)) {
-                        emailVerified = true;
-                        //to start dash board activity
-                        //TODO: save emailVerified Status of Current Use
-                        // TODO: according to the Callback from email verified save shared preference and pass data to dashboard
-                    }
+                    uname = userEd.getText().toString();
+                    uemail = emailEd.getText().toString();
+                    //add parse cross logic code
+                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Admin");
+                    query.whereEqualTo("Admin_Email", uemail);
+                    query.findInBackground(new FindCallback<ParseObject>() {
+                        @Override
+                        public void done(List<ParseObject> objects, ParseException e) {
+                            if (e == null) {
+                                prog.stopSpinning();
+                                regBtn.setEnabled(true);
+                                regBtn.setText("Register");
+                                for (ParseObject s : objects) {
+                                    if (s.getString("Admin_Email").equals(uemail)) {
+                                        emailVerified = true;
+                                        passEdBox.setVisibility(View.VISIBLE);
+                                        passEdBox.setAnimation(ani);
+                                    }
+                                    Log.i(TAG, "done: Data Recived Result " + s.getString("Admin_Email"));
+                                }
+                                Log.i(TAG, "done: Data Recived From Verification " + objects.size());
+                            } else {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
                 }
             } else if (spinflag == 1 && emailVerified) {
-                if (prog.isSpinning()) {
-                    prog.stopSpinning();
-                }
                 a.showProgressDialog("Please Wait", "Registering User...", this);
                 spinflag--;
-                passEdBox.setVisibility(View.VISIBLE);
-                passEdBox.setAnimation(ani);
-                //TODO: Add parse signup function from App class
+                upassw = passEd.getText().toString();
+                //call register user parse code.
+                //to start dash board activity.
+                ParseUser user = new ParseUser();
+                user.setUsername(uname);
+                user.setEmail(uemail);
+                user.setPassword(upassw);
+                user.signUpInBackground(new SignUpCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            startActivity(new Intent(Registration.this, DashBoard.class));
+                            //TODO: save emailVerified Status of Current Use
+                            //TODO: according to the Callback from email verified save shared preference and pass data to dashboard
+                        }
+                    }
+                });
+                a.stopProgressDilaog();
+
             }
-            regBtn.setText("Register");
+
         }
     }
 
@@ -95,7 +136,6 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         prog.stopSpinning();
 
     }
-
 
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));

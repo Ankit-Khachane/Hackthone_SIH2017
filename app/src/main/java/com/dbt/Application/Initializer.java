@@ -32,6 +32,6 @@ public class Initializer extends Application {
 
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         installation.saveInBackground();
-        Log.i(TAG, "onCreate: ");
+        Log.i(TAG, "Application---->>>>: Application Initialized");
     }
 }
