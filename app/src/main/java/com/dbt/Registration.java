@@ -15,8 +15,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dbt.Application.App;
+import com.dbt.Application.PreferenceManager;
 import com.dbt.UI.ProgressWheel;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -35,13 +37,15 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     protected int spinflag = 0;
     protected Animation ani;
     protected Button regBtn;
-    protected EditText emailEd, userEd, passEd;
-    protected TextView tv;
+    protected EditText emailEd, userEd, passEd, lastUserEd;
+    protected TextView tv, detailTv;
     protected ImageView passThubLogo;
     protected TextInputLayout etPasswordLayout;
     protected LinearLayout passEdBox;
     protected ProgressWheel prog;
+    private PreferenceManager pm;
     private String uname, uemail, upassw;
+    private ParseObject tempP;
     private String TAG = getClass().getSimpleName();
     private App a;
 
@@ -62,54 +66,75 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                 if (!prog.isSpinning()) {
                     prog.spin();
                     regBtn.setEnabled(false);
-                    spinflag++;
                     uname = userEd.getText().toString();
                     uemail = emailEd.getText().toString();
-                    //add parse cross logic code
-                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Admin");
-                    query.whereEqualTo("Admin_Email", uemail);
-                    query.findInBackground(new FindCallback<ParseObject>() {
-                        @Override
-                        public void done(List<ParseObject> objects, ParseException e) {
-                            if (e == null) {
-                                prog.stopSpinning();
-                                regBtn.setEnabled(true);
-                                regBtn.setText("Register");
-                                for (ParseObject s : objects) {
-                                    if (s.getString("Admin_Email").equals(uemail)) {
-                                        emailVerified = true;
-                                        passEdBox.setVisibility(View.VISIBLE);
-                                        passEdBox.setAnimation(ani);
+                    if (a.isValidEmail(uemail)) {
+                        Log.i(TAG, "onClick: Email Validated");
+                    }
+                    if (uname.matches("") || uemail.matches("")) {
+                        Toast.makeText(this, "Please Enter Details", Toast.LENGTH_SHORT).show();
+                    } else {
+                        //add parse cross logic code
+                        //TODO: add spinner for dynamic table cross check logic
+                        ParseQuery<ParseObject> query = ParseQuery.getQuery("Admin");
+                        query.whereEqualTo("Admin_Email", uemail);
+                        query.findInBackground(new FindCallback<ParseObject>() {
+                            @Override
+                            public void done(List<ParseObject> objects, ParseException e) {
+                                if (e == null) {
+                                    prog.stopSpinning();
+                                    regBtn.setEnabled(true);
+                                    regBtn.setText("Register");
+                                    for (ParseObject s : objects) {
+                                        if (s.getString("Admin_Email").equals(uemail)) {
+                                            emailVerified = true;
+                                            passEdBox.setVisibility(View.VISIBLE);
+                                            passEdBox.setAnimation(ani);
+                                            tempP = s;
+                                            spinflag++;
+                                        }
+                                        Log.i(TAG, "done: Data Recived Result " + s.getString("Admin_Email"));
                                     }
-                                    Log.i(TAG, "done: Data Recived Result " + s.getString("Admin_Email"));
+                                    Log.i(TAG, "done: Data Recived From Verification " + objects.size());
+                                } else {
+                                    e.printStackTrace();
                                 }
-                                Log.i(TAG, "done: Data Recived From Verification " + objects.size());
-                            } else {
-                                e.printStackTrace();
                             }
-                        }
-                    });
+                        });
+                    }
                 }
             } else if (spinflag == 1 && emailVerified) {
                 a.showProgressDialog("Please Wait", "Registering User...", this);
                 spinflag--;
                 upassw = passEd.getText().toString();
-                //call register user parse code.
-                //to start dash board activity.
-                ParseUser user = new ParseUser();
-                user.setUsername(uname);
-                user.setEmail(uemail);
-                user.setPassword(upassw);
-                user.signUpInBackground(new SignUpCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if (e == null) {
-                            startActivity(new Intent(Registration.this, DashBoard.class));
-                            //TODO: save emailVerified Status of Current Use
-                            //TODO: according to the Callback from email verified save shared preference and pass data to dashboard
+                if (upassw.matches("") || uname.matches("") || uemail.matches("")) {
+                    Toast.makeText(this, "Please Enter Details", Toast.LENGTH_SHORT).show();
+                } else {
+                    //call register user parse code.
+                    //to start dash board activity.
+                    final ParseUser user = new ParseUser();
+                    user.setUsername(uname);
+                    user.setEmail(uemail);
+                    user.setPassword(upassw);
+                    user.signUpInBackground(new SignUpCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                ParseUser u = ParseUser.getCurrentUser();
+                                if (u.getBoolean("emailVerified")) {
+                                    //set session sharedstatus
+                                    pm.setSession(tempP.getString("Admin_Name"), tempP.getString("Admin_Email"), "Admin", false, true, false, tempP.getString("Admin_uuid"));
+                                    startActivity(new Intent(Registration.this, DashBoard.class));
+                                } else {
+                                    startActivity(new Intent(Registration.this, DashBoard.class));
+                                }
+
+                                //TODO: save emailVerified Status of Current Use
+                                //TODO: according to the Callback from email verified save shared preference and pass data to dashboard
+                            }
                         }
-                    }
-                });
+                    });
+                }
                 a.stopProgressDilaog();
 
             }
@@ -120,19 +145,22 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         //TODO : Add Progress dialog at the registration process
         a = new App(this);
-        emailEd = (EditText) findViewById(R.id.email_ed);
-        userEd = (EditText) findViewById(R.id.user_ed);
-        passEd = (EditText) findViewById(R.id.pass_ed);
-        regBtn = (Button) findViewById(R.id.reg_btn);
-        regBtn.setOnClickListener(Registration.this);
-        tv = (TextView) findViewById(R.id.tv);
-        tv.setPaintFlags(tv.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        passThubLogo = (ImageView) findViewById(R.id.pass_thub_logo);
-        etPasswordLayout = (TextInputLayout) findViewById(R.id.etPasswordLayout);
         passEdBox = (LinearLayout) findViewById(R.id.pass_ed_box);
+        emailEd = (EditText) findViewById(R.id.email_ed);
+        userEd = (EditText) findViewById(R.id.first_user_ed);
+        passEd = (EditText) findViewById(R.id.pass_ed);
+        lastUserEd = (EditText) findViewById(R.id.last_user_ed);
+        etPasswordLayout = (TextInputLayout) findViewById(R.id.etPasswordLayout);
+        regBtn = (Button) findViewById(R.id.reg_btn);
+        prog = (ProgressWheel) findViewById(R.id.loading);
+        tv = (TextView) findViewById(R.id.tv);
+        detailTv = (TextView) findViewById(R.id.detail_tv);
+        passThubLogo = (ImageView) findViewById(R.id.pass_thub_logo);
+        regBtn.setOnClickListener(Registration.this);
+        tv.setPaintFlags(tv.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         passEdBox.setVisibility(View.INVISIBLE);
         ani = AnimationUtils.loadAnimation(this, android.support.v7.appcompat.R.anim.abc_slide_in_bottom);
-        prog = (ProgressWheel) findViewById(R.id.loading);
+        pm = new PreferenceManager(this);
         prog.stopSpinning();
 
     }

@@ -2,6 +2,9 @@ package com.dbt.Application;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.util.Patterns;
+
+import java.util.regex.Pattern;
 
 /**
  * Created by khach on 19-03-2017.
@@ -35,6 +38,11 @@ public class App {
 
     public void stopProgressDilaog() {
         progressDialog.cancel();
+    }
+
+    private boolean isValidEmail(String email) {
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return pattern.matcher(email).matches();
     }
 
 
