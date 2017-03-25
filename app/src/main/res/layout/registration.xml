@@ -17,10 +17,61 @@
         android:layout_centerVertical="true">
         //TODO: add material designed Spinner
 
+        <TextView
+            android:id="@+id/user_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="Select User Type"
+            android:textAlignment="center"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="18dp"
+            android:textStyle="bold"/>
+
+        <RadioGroup
+            android:id="@+id/rb_grp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/user_tv"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center_vertical|center_horizontal|center"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="5dp">
+
+            <RadioButton
+                android:id="@+id/prof_rd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_weight="1"
+                android:text="Professor"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="18sp"
+                app:buttonTint="@color/colorAccent"/>
+
+            <RadioButton
+                android:id="@+id/std_rd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_weight="1"
+                android:text="Student"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="18sp"
+                app:buttonTint="@color/colorAccent"/>
+        </RadioGroup>
+
         <LinearLayout
             android:id="@+id/first_user_ed_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/rb_grp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:background="@drawable/round_corner_shape"

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +34,7 @@ import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class Registration extends AppCompatActivity implements View.OnClickListener {
+public class Registration extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
     protected static boolean emailVerified = false;
     protected int spinflag = 0;
@@ -43,8 +46,12 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     protected TextInputLayout etPasswordLayout;
     protected LinearLayout passEdBox;
     protected ProgressWheel prog;
+    protected RadioButton profRd;
+    protected RadioButton stdRd;
+    protected RadioGroup rbGrp;
+    protected TextView userTv;
     private PreferenceManager pm;
-    private String uname, uemail, upassw;
+    private String uname, uemail, upassw, utype;
     private ParseObject tempP;
     private String TAG = getClass().getSimpleName();
     private App a;
@@ -162,10 +169,32 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         ani = AnimationUtils.loadAnimation(this, android.support.v7.appcompat.R.anim.abc_slide_in_bottom);
         pm = new PreferenceManager(this);
         prog.stopSpinning();
+        profRd = (RadioButton) findViewById(R.id.prof_rd);
+        stdRd = (RadioButton) findViewById(R.id.std_rd);
+        rbGrp = (RadioGroup) findViewById(R.id.rb_grp);
+        rbGrp.setOnCheckedChangeListener(this);
+        userTv = (TextView) findViewById(R.id.user_tv);
+        userTv.setPaintFlags(tv.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
     }
 
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+        switch (checkedId) {
+            case R.id.prof_rd:
+                utype = "Professor";
+                group.setClickable(false);
+                Toast.makeText(this, "Professor", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.std_rd:
+                utype = "Student";
+                group.setClickable(false);
+                Toast.makeText(this, "Student", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 }

@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dbt.Application.App;
+import com.parse.LogInCallback;
+import com.parse.ParseException;
 import com.parse.ParseUser;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -23,7 +25,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     protected Button loginBtn, gotoRegister;
     protected TextView forgot, loginHeader;
     protected App a;
-    private String lname, lemail;
+    private String lname, lemail, lpass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,22 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         if (view.getId() == R.id.login_btn) {
             //TODO: Add Login Parse Button Action Code
+            lname = emailEd.getText().toString();
+            lpass = passEd.getText().toString();
+            if (lname.matches("") || lpass.matches("")) {
+                Toast.makeText(this, "Please Enter Details", Toast.LENGTH_SHORT).show();
+            } else {
+                ParseUser.logInInBackground(lname, lpass, new LogInCallback() {
+                    public void done(ParseUser user, ParseException e) {
+                        if (user != null) {
+                            // Hooray! The user is logged in.
+
+                        } else {
+                            // Signup failed. Look at the ParseException to see what happened.
+                        }
+                    }
+                });
+            }
             a.showProgressDialog("Please Wait", "Logging in ..", this);
             Toast.makeText(this, "Login Button Clicked : " + emailEd.getText() + "-" + passEd.getText(), Toast.LENGTH_SHORT).show();
         } else if (view.getId() == R.id.goto_register) {
