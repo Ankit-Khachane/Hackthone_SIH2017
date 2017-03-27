@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".DashBoard">
         </activity>
+        <activity android:name=".TakeAttendance">
+        </activity>
     </application>
 
 </manifest>

@@ -34,7 +34,7 @@ import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class Registration extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+public class Registration extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, View.OnLongClickListener {
 
     protected static boolean emailVerified = false;
     protected int spinflag = 0;
@@ -51,7 +51,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     protected RadioGroup rbGrp;
     protected TextView userTv;
     private PreferenceManager pm;
-    private String uname, uemail, upassw, utype, user_mailtag;
+    private String uname, uemail, upassw, utype, user_mailtag, rf_name, rl_name;
     private ParseObject tempP;
     private String TAG = getClass().getSimpleName();
     private App a;
@@ -130,7 +130,8 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                                 ParseUser u = ParseUser.getCurrentUser();
                                 if (u.getBoolean("emailVerified")) {
                                     //set session sharedstatus
-                                    pm.setSession(tempP.getString("Admin_Name"), tempP.getString(user_mailtag), "useretyape", false, true, false, tempP.getString("Admin_uuid"));
+                                    String temp_name = tempP.get(rf_name) + " " + tempP.getString(rl_name);
+                                    pm.setSession(temp_name, tempP.getString(user_mailtag), "useretyape", false, true, false, tempP.getString("Admin_uuid"));
                                     startActivity(new Intent(Registration.this, DashBoard.class));
                                     finish();
                                 } else {
@@ -169,7 +170,9 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         pm = new PreferenceManager(this);
         prog.stopSpinning();
         profRd = (RadioButton) findViewById(R.id.prof_rd);
+        profRd.setOnLongClickListener(this);
         stdRd = (RadioButton) findViewById(R.id.std_rd);
+        stdRd.setOnLongClickListener(this);
         rbGrp = (RadioGroup) findViewById(R.id.rb_grp);
         rbGrp.setOnCheckedChangeListener(this);
         userTv = (TextView) findViewById(R.id.user_tv);
@@ -187,15 +190,39 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             case R.id.prof_rd:
                 utype = "Professor";
                 user_mailtag = "Prof_Email";
-                group.setClickable(false);
+                rf_name = "Prof_F_name";
+                rl_name = "Prof_L_name";
+                profRd.setEnabled(false);
+                stdRd.setEnabled(false);
                 Toast.makeText(this, "Proffessor", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.std_rd:
                 utype = "Students";
                 user_mailtag = "Stud_Email";
-                group.setClickable(false);
+                rf_name = "Stud_F_Name";
+                rl_name = "Stud_L_Name";
+                profRd.setEnabled(false);
+                stdRd.setEnabled(false);
                 Toast.makeText(this, "Student", Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        switch (v.getId()) {
+            case R.id.prof_rd:
+                profRd.setEnabled(true);
+                stdRd.setEnabled(true);
+                Toast.makeText(this, "Select Your User Type", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.std_rd:
+                profRd.setEnabled(true);
+                stdRd.setEnabled(true);
+                Toast.makeText(this, "Select Your User Type", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        return false;
     }
 }
