@@ -9,6 +9,6 @@ public class DashBoard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dash_board);
-        //TODO :get Data From Register Block
+        //TODO :get Data From Register Bloc
     }
 }

@@ -51,7 +51,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     protected RadioGroup rbGrp;
     protected TextView userTv;
     private PreferenceManager pm;
-    private String uname, uemail, upassw, utype;
+    private String uname, uemail, upassw, utype, user_mailtag;
     private ParseObject tempP;
     private String TAG = getClass().getSimpleName();
     private App a;
@@ -83,8 +83,8 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                     } else {
                         //add parse cross logic code
                         //TODO: add spinner for dynamic table cross check logic
-                        ParseQuery<ParseObject> query = ParseQuery.getQuery("Admin");
-                        query.whereEqualTo("Admin_Email", uemail);
+                        ParseQuery<ParseObject> query = ParseQuery.getQuery(utype);
+                        query.whereEqualTo(user_mailtag, uemail);
                         query.findInBackground(new FindCallback<ParseObject>() {
                             @Override
                             public void done(List<ParseObject> objects, ParseException e) {
@@ -93,14 +93,14 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                                     regBtn.setEnabled(true);
                                     regBtn.setText("Register");
                                     for (ParseObject s : objects) {
-                                        if (s.getString("Admin_Email").equals(uemail)) {
+                                        if (s.getString(user_mailtag).equals(uemail)) {
                                             emailVerified = true;
                                             passEdBox.setVisibility(View.VISIBLE);
                                             passEdBox.setAnimation(ani);
                                             tempP = s;
                                             spinflag++;
                                         }
-                                        Log.i(TAG, "done: Data Recived Result " + s.getString("Admin_Email"));
+                                        Log.i(TAG, "done: Data Recived Result " + s.getString(user_mailtag));
                                     }
                                     Log.i(TAG, "done: Data Recived From Verification " + objects.size());
                                 } else {
@@ -130,12 +130,13 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                                 ParseUser u = ParseUser.getCurrentUser();
                                 if (u.getBoolean("emailVerified")) {
                                     //set session sharedstatus
-                                    pm.setSession(tempP.getString("Admin_Name"), tempP.getString("Admin_Email"), "Admin", false, true, false, tempP.getString("Admin_uuid"));
+                                    pm.setSession(tempP.getString("Admin_Name"), tempP.getString(user_mailtag), "useretyape", false, true, false, tempP.getString("Admin_uuid"));
                                     startActivity(new Intent(Registration.this, DashBoard.class));
+                                    finish();
                                 } else {
                                     startActivity(new Intent(Registration.this, DashBoard.class));
+                                    finish();
                                 }
-
                                 //TODO: save emailVerified Status of Current Use
                                 //TODO: according to the Callback from email verified save shared preference and pass data to dashboard
                             }
@@ -143,9 +144,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                     });
                 }
                 a.stopProgressDilaog();
-
             }
-
         }
     }
 
@@ -187,11 +186,13 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         switch (checkedId) {
             case R.id.prof_rd:
                 utype = "Professor";
+                user_mailtag = "Prof_Email";
                 group.setClickable(false);
-                Toast.makeText(this, "Professor", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Proffessor", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.std_rd:
-                utype = "Student";
+                utype = "Students";
+                user_mailtag = "Stud_Email";
                 group.setClickable(false);
                 Toast.makeText(this, "Student", Toast.LENGTH_SHORT).show();
                 break;

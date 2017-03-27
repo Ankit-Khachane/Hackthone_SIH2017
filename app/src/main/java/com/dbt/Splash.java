@@ -31,7 +31,7 @@ public class Splash extends AppCompatActivity {
             anim.setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationStart(Animation animation) {
-                    Toast.makeText(Splash.this, "Animation Started", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(Splash.this, "Animation Started", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -39,7 +39,7 @@ public class Splash extends AppCompatActivity {
                     startActivity(new Intent(Splash.this, Login.class));
                     finish();
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    Toast.makeText(Splash.this, "Animation Stopped", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(Splash.this, "Animation Stopped", Toast.LENGTH_SHORT).show();
 
                 }
 
