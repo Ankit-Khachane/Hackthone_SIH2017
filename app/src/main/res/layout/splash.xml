@@ -14,5 +14,5 @@
         android:layout_height="300dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/dbt_splash_logo"/>
+        android:src="@drawable/dbt_rounded_logo"/>
 </RelativeLayout>

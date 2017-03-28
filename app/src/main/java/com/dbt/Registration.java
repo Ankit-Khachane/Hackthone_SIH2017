@@ -131,12 +131,20 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                                 if (u.getBoolean("emailVerified")) {
                                     //set session sharedstatus
                                     String temp_name = tempP.get(rf_name) + " " + tempP.getString(rl_name);
-                                    pm.setSession(temp_name, tempP.getString(user_mailtag), "useretyape", false, true, false, tempP.getString("Admin_uuid"));
+                                    pm.setSession(temp_name,
+                                            tempP.getString(user_mailtag),
+                                            "useretyape",
+                                            false,
+                                            true,
+                                            true,
+                                            tempP.getString("Admin_uuid"));
                                     startActivity(new Intent(Registration.this, DashBoard.class));
                                     finish();
+                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 } else {
                                     startActivity(new Intent(Registration.this, DashBoard.class));
                                     finish();
+                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 }
                                 //TODO: save emailVerified Status of Current Use
                                 //TODO: according to the Callback from email verified save shared preference and pass data to dashboard
@@ -203,7 +211,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                 rl_name = "Stud_L_Name";
                 profRd.setEnabled(false);
                 stdRd.setEnabled(false);
-                Toast.makeText(this, "Student", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Students", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

@@ -63,8 +63,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                             Toast.makeText(Login.this, "Login Done...", Toast.LENGTH_SHORT).show();
                             Log.i(TAG, "done: User Loged In");
                             //add setsession pref for login sesssion
+                            pref.setIsLoggedIn(true);
+                            pref.setSessionStatus(true);
                             startActivity(new Intent(Login.this, DashBoard.class));
                             finish();
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         } else {
                             // Signup failed. Look at the ParseException to see what happened.
                         }

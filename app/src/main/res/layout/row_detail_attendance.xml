@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/holo_orange_light">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_view"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="false"
+        android:layout_centerVertical="false"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/dbt_rounded_logo"/>
+
+    <TextView
+        android:id="@+id/stud_name_tvmain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/profile_view"
+        android:gravity="center_vertical"
+        android:text="Student Name"
+        android:textSize="14sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/stud_name_tvmain"
+        android:layout_toEndOf="@+id/profile_view"
+        android:gravity="center_vertical"
+        android:text="details"
+        android:textSize="10sp"/>
+
+    <TextView
+        android:id="@+id/percent_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/stud_name_tvmain"
+        android:layout_alignTop="@+id/profile_view"
+        android:padding="10dp"
+        android:text="%"/>
+</RelativeLayout>

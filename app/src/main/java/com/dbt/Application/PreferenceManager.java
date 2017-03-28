@@ -17,7 +17,7 @@ public class PreferenceManager {
     private static final String UserType = "UserType";
     private static final String UID = "UID";
 
-    static SharedPreferences sp;
+    SharedPreferences sp;
     SharedPreferences.Editor edtr;
     Context p_ctx;
 
@@ -28,7 +28,7 @@ public class PreferenceManager {
         edtr = sp.edit();
     }
 
-    public static String getUserName() {
+    public String getUserName() {
         return sp.getString(UserName, null);
     }
 
@@ -37,7 +37,7 @@ public class PreferenceManager {
         edtr.commit();
     }
 
-    public static String getUserEmail() {
+    public String getUserEmail() {
         return sp.getString(UserEmail, null);
     }
 
@@ -46,7 +46,7 @@ public class PreferenceManager {
         edtr.commit();
     }
 
-    public static String getUserType() {
+    public String getUserType() {
         return sp.getString(UserType, null);
     }
 
@@ -55,7 +55,7 @@ public class PreferenceManager {
         edtr.commit();
     }
 
-    public static boolean getEmailVerified() {
+    public boolean getEmailVerified() {
         return sp.getBoolean(EmailVerified, false);
     }
 
@@ -64,7 +64,7 @@ public class PreferenceManager {
         edtr.commit();
     }
 
-    public static boolean getIsLoggedIn() {
+    public boolean getIsLoggedIn() {
         return sp.getBoolean(isLoggedIn, false);
     }
 
@@ -73,7 +73,7 @@ public class PreferenceManager {
         edtr.commit();
     }
 
-    public static boolean getSessionStatus() {
+    public boolean getSessionStatus() {
         return sp.getBoolean(SessionStatus, false);
     }
 
@@ -82,7 +82,7 @@ public class PreferenceManager {
         edtr.commit();
     }
 
-    public static String getUID() {
+    public String getUID() {
         return sp.getString(UID, null);
     }
 

@@ -3,9 +3,11 @@ package com.dbt.Application;
 import android.app.Application;
 import android.util.Log;
 
+import com.dbt.DataModel.Students;
 import com.dbt.R;
 import com.parse.Parse;
 import com.parse.ParseInstallation;
+import com.parse.ParseObject;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -24,6 +26,7 @@ public class Initializer extends Application {
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         );
+        ParseObject.registerSubclass(Students.class);
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId(getResources().getString(R.string.ApplicationId))
                 .clientKey(getResources().getString(R.string.AndroidClientKey))

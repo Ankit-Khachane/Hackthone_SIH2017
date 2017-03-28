@@ -16,20 +16,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!--<de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/c_img"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            app:civ_border_width="1dp"
-            app:civ_border_color="#ECEFF1"
-            app:srcCompat="@drawable/shiliw"/>-->
         <ImageView
             android:id="@+id/c_iv"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@drawable/round_corner_shape"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/dbt_splash_logo"/>
+            android:background="@color/cardview_light_background"
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/c_name"
@@ -39,7 +31,9 @@
             android:layout_margin="5dp"
             android:background="@drawable/round_corner_shape"
             android:backgroundTint="#217678"
+            android:ellipsize="end"
             android:fontFamily="sans-serif-condensed0"
+            android:maxLines="1"
             android:padding="3dp"
             android:text="Name"
             android:textAlignment="center"
@@ -48,7 +42,7 @@
             android:textStyle="bold"/>
 
         <RadioGroup
-            android:id="@+id/radio_group"
+            android:id="@+id/Attendance_rb_grp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/c_name"
@@ -58,13 +52,13 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton4"
+                android:id="@+id/Present_rb"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/round_corner_shape"
-                android:backgroundTint="#962e7d32"
+                android:backgroundTint="#7d2e7d32"
                 android:buttonTint="@android:color/background_light"
                 android:paddingRight="3dp"
                 android:text="P"
@@ -73,12 +67,12 @@
                 android:textStyle="bold"/>
 
             <RadioButton
-                android:id="@+id/radioButton3"
+                android:id="@+id/Absent_rb"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/round_corner_shape"
-                android:backgroundTint="#96c62828"
+                android:backgroundTint="#7dc62828"
                 android:buttonTint="@android:color/background_light"
                 android:paddingRight="3dp"
                 android:text="A"

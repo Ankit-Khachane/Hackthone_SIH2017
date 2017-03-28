@@ -54,8 +54,11 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         } else if (view.getId() == R.id.stud_attend_c) {
             //goto Attendance page
             startActivity(new Intent(DashBoard.this,TakeAttendance.class));
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         } else if (view.getId() == R.id.attend_pan_c) {
             //attendance detail page
+            startActivity(new Intent(DashBoard.this, DetailAttendance.class));
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         } else if (view.getId() == R.id.stud_thes_c) {
             //student thesis detail page
 

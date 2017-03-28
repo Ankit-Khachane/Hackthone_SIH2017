@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dbt.TakeAttendance">
+    tools:context="com.dbt.DetailAttendance">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/dash_tb"
@@ -59,13 +60,23 @@
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/attendane_detail_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="false"
         android:layout_below="@+id/dash_tb"
-        android:layout_centerHorizontal="true"
-        android:scrollbars="horizontal"
-        tools:listitem="@layout/row_take_attendance"/>
+        android:background="#B0BEC5"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".DetailAttend">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/attendance_detail_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/row_detail_attendance"/>
+    </LinearLayout>
 
 </RelativeLayout>

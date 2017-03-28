@@ -27,6 +27,8 @@
         </activity>
         <activity android:name=".TakeAttendance">
         </activity>
+        <activity android:name=".DetailAttendance">
+        </activity>
     </application>
 
 </manifest>

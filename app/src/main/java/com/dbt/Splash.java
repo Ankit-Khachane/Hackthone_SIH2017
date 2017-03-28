@@ -12,10 +12,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.dbt.Application.PreferenceManager;
+
 public class Splash extends AppCompatActivity {
     String TAG = getClass().getSimpleName();
     ImageView logo;
     Animation anim;
+    PreferenceManager prf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,7 @@ public class Splash extends AppCompatActivity {
 
         logo = (ImageView) findViewById(R.id.dbt_logo);
         anim = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
+        prf = new PreferenceManager(this);
         if (isNetworkAvailable()) {
             Toast.makeText(this, "Internet is Available", Toast.LENGTH_SHORT).show();
             //Splash Screen Thread Logic
@@ -31,16 +35,19 @@ public class Splash extends AppCompatActivity {
             anim.setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationStart(Animation animation) {
-//                    Toast.makeText(Splash.this, "Animation Started", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    startActivity(new Intent(Splash.this, Login.class));
-                    finish();
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                    Toast.makeText(Splash.this, "Animation Stopped", Toast.LENGTH_SHORT).show();
-
+                    if (prf.getIsLoggedIn() && prf.getSessionStatus()) {
+                        startActivity(new Intent(Splash.this, DashBoard.class));
+                        finish();
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    } else {
+                        startActivity(new Intent(Splash.this, Login.class));
+                        finish();
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    }
                 }
 
                 @Override
