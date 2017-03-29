@@ -16,9 +16,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dbt.R;
+import com.parse.GetCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -43,7 +48,7 @@ public class StudAdapter extends RecyclerView.Adapter<StudAdapter.StudViewHolder
 
     @Override
     public void onBindViewHolder(final StudViewHolder hld, int position) {
-        Students s = studArray.get(position);
+        final Students s = studArray.get(position);
         if (s != null) {
             hld.tv.setText(s.getStudFName() + " " + s.getStudLName());
             s.getStudProfile().getDataInBackground(new GetDataCallback() {
@@ -59,6 +64,63 @@ public class StudAdapter extends RecyclerView.Adapter<StudAdapter.StudViewHolder
             });
         }
         Log.i(TAG, "onBindViewHolder: Data Bound  " + s.getStudFName() + "  " + s.getStudEmail());
+
+        hld.tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ct, "TextViw from viewholder is clicked " + hld.tv.getText(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        hld.markgrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                switch (checkedId) {
+                    case R.id.Absent_rb:
+                        //add mark attendance function for clicked student view block and pass absent as parameter
+                        hld.a.setClickable(false);
+                        hld.p.setClickable(false);
+                        markAttendance("A", s.getObjectId());
+                        Toast.makeText(ct, "Marked Absent", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.Present_rb:
+                        //add mark attendance function for clicked student view block and pass absent as parameter
+                        hld.a.setClickable(false);
+                        hld.p.setClickable(false);
+                        markAttendance("P", s.getObjectId());
+                        Toast.makeText(ct, "Marked Present", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
+        hld.markgrp.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                hld.a.setClickable(true);
+                hld.p.setClickable(true);
+                Toast.makeText(ct, "Edit Attendance", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+    }
+
+    private void markAttendance(final String attendStatus, String selectedStudent) {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat month_date = new SimpleDateFormat("MMMM");
+        final String ThisMonth = month_date.format(cal.getTime());
+        ParseQuery<Students> query = ParseQuery.getQuery(Students.class);
+        query.getInBackground(selectedStudent, new GetCallback<Students>() {
+            public void done(Students stud, ParseException e) {
+                if (e == null) {
+                    ParseObject st = stud.getStudAttendance().getParseObject(ThisMonth);
+                    if (st != null) {
+                        st.put(ThisMonth + 1, attendStatus);
+                        st.saveInBackground();
+                    }
+                } else {
+
+                }
+            }
+        });
     }
 
     @Override
@@ -79,40 +141,6 @@ public class StudAdapter extends RecyclerView.Adapter<StudAdapter.StudViewHolder
             p = (RadioButton) itemView.findViewById(R.id.Present_rb);
             a = (RadioButton) itemView.findViewById(R.id.Absent_rb);
             markgrp = (RadioGroup) itemView.findViewById(R.id.Attendance_rb_grp);
-            tv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(ct, "TextViw from viewholder is clicked " + tv.getText(), Toast.LENGTH_SHORT).show();
-                }
-            });
-            markgrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                    switch (checkedId) {
-                        case R.id.Absent_rb:
-                            //add mark attendance function for clicked student view block and pass absent as parameter
-                            a.setClickable(false);
-                            p.setClickable(false);
-                            Toast.makeText(ct, "Marked Absent", Toast.LENGTH_SHORT).show();
-                            break;
-                        case R.id.Present_rb:
-                            //add mark attendance function for clicked student view block and pass absent as parameter
-                            a.setClickable(false);
-                            p.setClickable(false);
-                            Toast.makeText(ct, "Marked Present", Toast.LENGTH_SHORT).show();
-                            break;
-                    }
-                }
-            });
-            markgrp.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    a.setClickable(true);
-                    p.setClickable(true);
-                    Toast.makeText(ct, "Edit Attendance", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-            });
         }
 
     }

@@ -1,6 +1,7 @@
 package com.dbt.DataModel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dbt.R;
+import com.dbt.StudentPage;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
 
@@ -77,6 +79,12 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
             detail = (TextView) itemView.findViewById(R.id.details);
             percent = (TextView) itemView.findViewById(R.id.percent_details);
             cv = (CircleImageView) itemView.findViewById(R.id.profile_view);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ctx.startActivity(new Intent(ctx, StudentPage.class));
+                }
+            });
 
         }
     }

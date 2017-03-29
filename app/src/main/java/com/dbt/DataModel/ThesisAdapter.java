@@ -1,6 +1,7 @@
 package com.dbt.DataModel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dbt.R;
+import com.dbt.StudentPage;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
 
@@ -75,6 +77,12 @@ public class ThesisAdapter extends RecyclerView.Adapter<ThesisAdapter.ThesisViwH
             studtv = (TextView) itemView.findViewById(R.id.thesis_stud_name);
             thesis = (TextView) itemView.findViewById(R.id.thesis_stud_thesis);
             tcv = (CircleImageView) itemView.findViewById(R.id.thesi_prof_cv);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ctx.startActivity(new Intent(ctx, StudentPage.class));
+                }
+            });
 
         }
     }

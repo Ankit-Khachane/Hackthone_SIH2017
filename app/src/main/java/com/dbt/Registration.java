@@ -41,15 +41,13 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     protected Animation ani;
     protected Button regBtn;
     protected EditText emailEd, userEd, passEd, lastUserEd;
-    protected TextView tv, detailTv;
+    protected TextView tv, detailTv, userTv;
     protected ImageView passThubLogo;
     protected TextInputLayout etPasswordLayout;
     protected LinearLayout passEdBox;
     protected ProgressWheel prog;
-    protected RadioButton profRd;
-    protected RadioButton stdRd;
+    protected RadioButton profRd, stdRd;
     protected RadioGroup rbGrp;
-    protected TextView userTv;
     private PreferenceManager pm;
     private String uname, uemail, upassw, utype, user_mailtag, rf_name, rl_name;
     private ParseObject tempP;
@@ -133,7 +131,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                                     String temp_name = tempP.get(rf_name) + " " + tempP.getString(rl_name);
                                     pm.setSession(temp_name,
                                             tempP.getString(user_mailtag),
-                                            "useretyape",
+                                            utype,
                                             false,
                                             true,
                                             true,
@@ -200,6 +198,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                 user_mailtag = "Prof_Email";
                 rf_name = "Prof_F_name";
                 rl_name = "Prof_L_name";
+
                 profRd.setEnabled(false);
                 stdRd.setEnabled(false);
                 Toast.makeText(this, "Proffessor", Toast.LENGTH_SHORT).show();

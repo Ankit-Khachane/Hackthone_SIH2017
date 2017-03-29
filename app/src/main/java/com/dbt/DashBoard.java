@@ -17,16 +17,9 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class DashBoard extends AppCompatActivity implements View.OnClickListener {
 
     protected CircleImageView tImagec;
-    protected TextView titleMain;
-    protected TextView titleSmall;
+    protected TextView titleMain, titleSmall, blankTv, studAttendTv, attendPanTv, studThesTv;
     protected Toolbar dashTb;
-    protected TextView blankTv;
-    protected TextView studAttendTv;
-    protected CardView studAttendC;
-    protected TextView attendPanTv;
-    protected CardView attendPanC;
-    protected TextView studThesTv;
-    protected CardView studThesC;
+    protected CardView studAttendC, attendPanC, studThesC;
     protected LinearLayout contentTask;
     protected RelativeLayout dashboard;
 
@@ -34,7 +27,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.dash_board);
-        //TODO :get Data From Register Bloc
+        //add email verfied cross check logic from sharedpreference.
         initView();
 
     }
@@ -53,7 +46,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
             //profile view
         } else if (view.getId() == R.id.stud_attend_c) {
             //goto Attendance page
-            startActivity(new Intent(DashBoard.this,TakeAttendance.class));
+            startActivity(new Intent(DashBoard.this, TakeAttendance.class));
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         } else if (view.getId() == R.id.attend_pan_c) {
             //attendance detail page

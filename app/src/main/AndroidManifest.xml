@@ -31,6 +31,8 @@
         </activity>
         <activity android:name=".ThesisList">
         </activity>
+        <activity android:name=".StudentPage">
+        </activity>
     </application>
 
 </manifest>
