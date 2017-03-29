@@ -22,35 +22,35 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by khach on 28-03-2017.
  */
 
-public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailViewHolder> {
+public class ThesisAdapter extends RecyclerView.Adapter<ThesisAdapter.ThesisViwHolder> {
     List<Students> studlist;
     Context ctx;
     private String TAG = getClass().getSimpleName();
 
-    public DetailAdapter(List<Students> studlist, Context ctx) {
+    public ThesisAdapter(List<Students> studlist, Context ctx) {
         this.studlist = studlist;
         this.ctx = ctx;
     }
 
     @Override
-    public DetailViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_detail_attendance, parent, false);
-        return new DetailViewHolder(view);
+    public ThesisViwHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_thesis_detail, parent, false);
+        return new ThesisViwHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final DetailViewHolder h, int position) {
+    public void onBindViewHolder(final ThesisViwHolder h, int position) {
         Students s = studlist.get(position);
-        //add data binding logic code
         if (s != null) {
-            h.studname.setText(s.getStudFName() + " " + s.getStudLName());
 //            ParseFile p= new ParseFile()
+            h.studtv.setText(s.getStudFName() + " " + s.getStudLName());
             s.getStudProfile().getDataInBackground(new GetDataCallback() {
                 public void done(byte[] data, ParseException e) {
                     if (e == null) {
                         // data has the bytes for the resume
                         Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                        h.cv.setImageBitmap(bitmap);
+                        h.tcv.setImageBitmap(bitmap);
                     } else {
                         // something went wrong
                     }
@@ -58,8 +58,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
             });
             Log.i(TAG, "onBindViewHolder: data retrived " + s.getStudFName() + " " + s.getStudLName());
         }
-
-
+        Log.i(TAG, "onBindViewHolder: Data Thesis Activity");
     }
 
     @Override
@@ -67,16 +66,15 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
         return studlist.size();
     }
 
-    public class DetailViewHolder extends RecyclerView.ViewHolder {
-        TextView studname, detail, percent;
-        CircleImageView cv;
+    public class ThesisViwHolder extends RecyclerView.ViewHolder {
+        CircleImageView tcv;
+        TextView studtv, thesis;
 
-        public DetailViewHolder(View itemView) {
+        public ThesisViwHolder(View itemView) {
             super(itemView);
-            studname = (TextView) itemView.findViewById(R.id.stud_name_tvmain);
-            detail = (TextView) itemView.findViewById(R.id.details);
-            percent = (TextView) itemView.findViewById(R.id.percent_details);
-            cv = (CircleImageView) itemView.findViewById(R.id.profile_view);
+            studtv = (TextView) itemView.findViewById(R.id.thesis_stud_name);
+            thesis = (TextView) itemView.findViewById(R.id.thesis_stud_thesis);
+            tcv = (CircleImageView) itemView.findViewById(R.id.thesi_prof_cv);
 
         }
     }

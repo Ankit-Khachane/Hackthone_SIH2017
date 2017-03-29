@@ -61,6 +61,8 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         } else if (view.getId() == R.id.stud_thes_c) {
             //student thesis detail page
+            startActivity(new Intent(DashBoard.this, ThesisList.class));
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
         }
     }

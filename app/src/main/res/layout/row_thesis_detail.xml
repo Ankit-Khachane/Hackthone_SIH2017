@@ -3,15 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/holo_orange_light">
+    android:background="@color/colorAccent">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_view"
+        android:id="@+id/thesi_prof_cv"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
-        android:layout_centerHorizontal="false"
-        android:layout_centerVertical="false"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -19,36 +17,31 @@
         android:src="@drawable/dbt_rounded_logo"/>
 
     <TextView
-        android:id="@+id/stud_name_tvmain"
+        android:id="@+id/thesis_stud_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/profile_view"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignTop="@+id/thesi_prof_cv"
+        android:layout_centerHorizontal="false"
+        android:layout_centerInParent="false"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/profile_view"
-        android:gravity="center_vertical"
+        android:layout_toEndOf="@+id/thesi_prof_cv"
         android:text="Student Name"
         android:textSize="18sp"
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/details"
+        android:id="@+id/thesis_stud_thesis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/stud_name_tvmain"
+        android:layout_below="@+id/thesis_stud_name"
+        android:layout_centerHorizontal="false"
+        android:layout_centerInParent="false"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
-        android:layout_toEndOf="@+id/profile_view"
-        android:gravity="center_vertical"
-        android:text="details"
+        android:layout_toEndOf="@+id/thesi_prof_cv"
+        android:text="Thesis Details"
         android:textSize="10sp"/>
-
-    <TextView
-        android:id="@+id/percent_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/stud_name_tvmain"
-        android:layout_alignTop="@+id/profile_view"
-        android:padding="10dp"
-        android:text="%"/>
 </RelativeLayout>
